@@ -3,9 +3,71 @@
   <head>
     <meta charset="utf-8">
     <title>teamatchclient</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
   </head>
   <body>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <script>
+  var config = {
+    apiKey: "AIzaSyDXL6J6PWs9UsHMZFNSMrHwduD_Y5_sHRE",
+    authDomain: "teammatch-5eaca.firebaseapp.com",
+    databaseURL: "https://teammatch-5eaca.firebaseio.com",
+    projectId: "teammatch-5eaca",
+    storageBucket: "",
+    messagingSenderId: "577392228819"
+  };
+  firebase.initializeApp(config);
+  </script>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1927151004268923";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+    			window.fbAsyncInit = function() {
+    				FB.init({
+    					appId            : '1927151004268923',
+    					autoLogAppEvents : true,
+    					xfbml            : true,
+    					version          : 'v2.9'
+    				});
+    			};
+    			(function(d, s, id){
+    				var js, fjs = d.getElementsByTagName(s)[0];
+    				if (d.getElementById(id)) {return;}
+    				js = d.createElement(s); js.id = id;
+    				js.src = "//connect.facebook.net/en_US/sdk.js";
+    				fjs.parentNode.insertBefore(js, fjs);
+    			}(document, 'script', 'facebook-jssdk'));
+    			function loginFB(){
+    				FB.login(function(response) {
+    					FB.api('/me', {fields: 'id,name,email'}, function(response2) {
+    						// axios.post('http://localhost:3000/user/login',response2)
+    						// .then(token=>{
+    						// 	localStorage.setItem('token',JSON.stringify(token.data))
+    						// 	checkToken()
+    						// })
+    						// .catch(err=>{
+    						// 	console.log(err);
+    						// })
+    					});
+    				}, {scope:'public_profile email'});
+    			}
+    			function logout(){
+    				window.localStorage.clear();
+    				window.location='/'
+    			}
+    			function checkToken(){
+    				if(localStorage.getItem('token')){
+    					var x = document.getElementById("fb-login");
+    					x.innerHTML = 'Logout';
+    					x.setAttribute( "onclick", "logout()" );
+    					 window.location="index.html"
+    				}
+    			}
+    		</script>
   </body>
 </html>
